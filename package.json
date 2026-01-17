@@ -1,0 +1,17 @@
+{
+  "name": "11-portfolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "live-server --port=3000",
+    "test": "jest --passWithNoTests",
+    "test-all": "jest --watchAll --passWithNoTests --coverage"
+  },
+  "keywords": [],
+  "author": "mano ...",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
