@@ -13,14 +13,13 @@ class Carousel {
         this.animationInProgress = false;
         this.animationDuration = 1000;
         this.itemsPerView = 1;
-        this.visibleItemIndex = 0;      // matomoje ekrano dalyje is atvaizduotu elementu labiausiai kaireje stovincio index'as visu duomenu atzvilgiu
+        this.visibleItemIndex = 0; // matomoje ekrano dalyje is atvaizduotu elementu labiausiai kaireje stovincio index'as visu duomenu atzvilgiu
 
-        this.init();
+        // this.init();
     }
 
     init() {
-        if (!this.isValidSelector() ||
-            !this.findElementBySelector()) {
+        if (!this.isValidSelector() || !this.findElementBySelector()) {
             return false;
         }
 
@@ -32,7 +31,9 @@ class Carousel {
             this.dotsEnabled = this.data.controls.dotsEnabled;
         }
 
-        this.data.itemsPerView = this.data.itemsPerView.sort((a, b) => a.minWidth - b.minWidth);
+        this.data.itemsPerView = this.data.itemsPerView.sort(
+            (a, b) => a.minWidth - b.minWidth
+        );
         this.itemsPerView = this.calculateItemsPerViewValue();
         this.visibleItemIndex = this.itemsPerView;
         this.render(this.itemsPerView);
@@ -40,8 +41,7 @@ class Carousel {
     }
 
     isValidSelector() {
-        if (typeof this.selector !== 'string' ||
-            this.selector === '') {
+        if (typeof this.selector !== 'string' || this.selector === '') {
             return false;
         }
         return true;
@@ -60,7 +60,7 @@ class Carousel {
         for (let i = 0; i < itemsCount; i++) {
             const obj = new this.component({
                 ...data[i],
-                imgPath: this.data.imgPath
+                imgPath: this.data.imgPath,
             });
             HTML += `<div class="item" style="width: ${itemWidth}%;">
                         ${obj.HTML()}
@@ -104,11 +104,11 @@ class Carousel {
         const clonedData = [
             ...this.data.list.slice(-itemsPerView),
             ...this.data.list,
-            ...this.data.list.slice(0, itemsPerView)
+            ...this.data.list.slice(0, itemsPerView),
         ];
         const itemsCount = clonedData.length;
-        const listWidth = itemsCount / itemsPerView * 100;
-        const translate = itemsPerView / clonedData.length * 100;
+        const listWidth = (itemsCount / itemsPerView) * 100;
+        const translate = (itemsPerView / clonedData.length) * 100;
 
         const HTML = `<div class="carousel">
                         <div class="gallery">
@@ -141,7 +141,10 @@ class Carousel {
     }
 
     slideAnimation() {
-        const translate = this.visibleItemIndex / (this.data.list.length + 2 * this.itemsPerView) * 100;
+        const translate =
+            (this.visibleItemIndex /
+                (this.data.list.length + 2 * this.itemsPerView)) *
+            100;
         this.listDOM.style.transform = `translateX(-${translate}%)`;
     }
 
@@ -153,9 +156,8 @@ class Carousel {
             if (this.itemsPerView !== itemsToRender) {
                 this.render(itemsToRender);
                 this.itemsPerView = itemsToRender;
-
             }
-        })
+        });
 
         if (this.dotsEnabled) {
             this.allDotsDOM.forEach((dotDOM, i) => {
@@ -168,7 +170,7 @@ class Carousel {
                             this.animationInProgress = false;
                         }, this.animationDuration);
                     }
-                })
+                });
             });
         }
         // PREVIOUS ITEM
@@ -186,20 +188,23 @@ class Carousel {
                         }, this.animationDuration);
                         setTimeout(() => {
                             this.listDOM.style.transition = `all ${this.animationDuration}ms`;
-                        }, this.animationDuration + 100)
+                        }, this.animationDuration + 100);
                     }
                     setTimeout(() => {
                         this.animationInProgress = false;
                     }, this.animationDuration);
                 }
-            })
+            });
             // NEXT ITEM
             this.allAnglesDOM[1].addEventListener('click', () => {
                 if (!this.animationInProgress) {
                     this.animationInProgress = true;
                     this.visibleItemIndex++;
                     this.slideAnimation();
-                    if (this.data.list.length + this.itemsPerView === this.visibleItemIndex) {
+                    if (
+                        this.data.list.length + this.itemsPerView ===
+                        this.visibleItemIndex
+                    ) {
                         setTimeout(() => {
                             this.listDOM.style.transition = 'all 0s';
                             this.visibleItemIndex = this.itemsPerView;
@@ -207,15 +212,15 @@ class Carousel {
                         }, this.animationDuration);
                         setTimeout(() => {
                             this.listDOM.style.transition = `all ${this.animationDuration}ms`;
-                        }, this.animationDuration + 10)
+                        }, this.animationDuration + 10);
                     }
                     setTimeout(() => {
                         this.animationInProgress = false;
                     }, this.animationDuration);
                 }
-            })
+            });
         }
     }
 }
 
-export { Carousel }
+export { Carousel };
