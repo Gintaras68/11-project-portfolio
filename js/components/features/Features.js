@@ -4,18 +4,21 @@ class Features {
         this.data = data;
 
         this.DOM = null;
-        this.maxItemsPerList = 'all';       // default: all, allowed: any postivie integer
+        this.maxItemsPerList = 'all'; // default: all, allowed: any postivie integer
         this.allowedRenderStrategies = ['first', 'last', 'random'];
         this.listRenderStrategy = this.allowedRenderStrategies[0];
         this.dataForRendering = [];
 
         this.init();
+        console.log(this);
     }
 
     init() {
-        if (!this.isValidSelector() ||
+        if (
+            !this.isValidSelector() ||
             !this.findElementBySelector() ||
-            !this.isValidData()) {
+            !this.isValidData()
+        ) {
             return false;
         }
 
@@ -27,8 +30,7 @@ class Features {
     }
 
     isValidSelector() {
-        if (typeof this.selector !== 'string' ||
-            this.selector === '') {
+        if (typeof this.selector !== 'string' || this.selector === '') {
             return false;
         }
         return true;
@@ -45,21 +47,21 @@ class Features {
 
     isValidData() {
         // this.data has to an object
-        if (typeof this.data !== 'object' ||
+        if (
+            typeof this.data !== 'object' ||
             Array.isArray(this.data) ||
-            this.data === null) {
+            this.data === null
+        ) {
             return false;
         }
 
         // this.data.imgPath has to exist
-        if (typeof this.data.imgPath !== 'string' ||
-            this.data.imgPath === '') {
+        if (typeof this.data.imgPath !== 'string' || this.data.imgPath === '') {
             return false;
         }
 
         // this.data.list has to exist
-        if (!Array.isArray(this.data.list) ||
-            this.data.list.length === 0) {
+        if (!Array.isArray(this.data.list) || this.data.list.length === 0) {
             return false;
         }
 
@@ -68,10 +70,12 @@ class Features {
 
     setMaxItemsPerList(itemsCount) {
         // allowed: integer > 0 | 'all'
-        if (typeof itemsCount === 'number' &&
+        if (
+            typeof itemsCount === 'number' &&
             isFinite(itemsCount) &&
             itemsCount > 0 &&
-            itemsCount % 1 === 0) {
+            itemsCount % 1 === 0
+        ) {
             this.maxItemsPerList = itemsCount;
         }
         if (itemsCount === 'all') {
@@ -82,9 +86,11 @@ class Features {
     }
 
     setRenderStrategy(strategyName) {
-        if (typeof strategyName === 'string' &&
+        if (
+            typeof strategyName === 'string' &&
             strategyName.length > 0 &&
-            this.allowedRenderStrategies.includes(strategyName)) {
+            this.allowedRenderStrategies.includes(strategyName)
+        ) {
             this.listRenderStrategy = strategyName;
         }
 
@@ -92,18 +98,19 @@ class Features {
     }
 
     isValidImageFile(fileName) {
-        if (typeof fileName !== 'string' ||
-            fileName.length < 5) {
+        if (typeof fileName !== 'string' || fileName.length < 5) {
             return false;
         }
 
         const allowedExtensions = ['png', 'jpg'];
         const fileParts = fileName.split('.');
         const extension = fileParts[fileParts.length - 1];
-        if (fileParts.length < 2 ||
+        if (
+            fileParts.length < 2 ||
             fileParts[0] === '' ||
             extension.length < 3 ||
-            !allowedExtensions.includes(extension)) {
+            !allowedExtensions.includes(extension)
+        ) {
             return false;
         }
 
@@ -114,7 +121,8 @@ class Features {
         const filteredData = [];
 
         for (const item of this.data.list) {
-            if (typeof item !== 'object' ||
+            if (
+                typeof item !== 'object' ||
                 Array.isArray(item) ||
                 item === null ||
                 typeof item.icon !== 'string' ||
@@ -126,7 +134,8 @@ class Features {
                 item.description === '' ||
                 typeof item.active !== 'boolean' ||
                 !item.active ||
-                Object.keys(item).length !== 4) {
+                Object.keys(item).length !== 4
+            ) {
                 continue;
             }
             filteredData.push(item);
@@ -141,7 +150,10 @@ class Features {
         }
 
         if (this.listRenderStrategy === 'first') {
-            this.dataForRendering = this.data.list.slice(0, this.maxItemsPerList);
+            this.dataForRendering = this.data.list.slice(
+                0,
+                this.maxItemsPerList
+            );
         }
 
         if (this.listRenderStrategy === 'last') {
@@ -173,7 +185,9 @@ class Features {
 
         for (const feature of this.dataForRendering) {
             HTML += `<div class="item">
-                        <img class="icon" src="${this.data.imgPath + feature.icon}" alt="${feature.title} feature">
+                        <img class="icon" src="${
+                            this.data.imgPath + feature.icon
+                        }" alt="${feature.title} feature">
                         <h4 class="title">${feature.title}</h4>
                         <p class="description">${feature.description}</p>
                     </div>`;
@@ -184,7 +198,7 @@ class Features {
     }
 }
 
-export { Features }
+export { Features };
 
 /*
 
