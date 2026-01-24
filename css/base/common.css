@@ -55,6 +55,10 @@
   background-color: var(--color-light);
 }
 
+.hide {
+  display: none;
+}
+
 /* -----------   didėjant ekranui ....   --------- */
 @media (min-width: 575px) {
   .section-title {

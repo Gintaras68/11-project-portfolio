@@ -43,3 +43,7 @@
   cursor: pointer;
   text-align: center;
 }
+
+.carousel img {
+  max-width: 100%;
+}

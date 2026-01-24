@@ -9,4 +9,4 @@ class Interface {
     }
 }
 
-export { Interface }
+export { Interface };

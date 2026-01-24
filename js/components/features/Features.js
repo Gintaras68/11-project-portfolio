@@ -10,7 +10,6 @@ class Features {
         this.dataForRendering = [];
 
         this.init();
-        console.log(this);
     }
 
     init() {
