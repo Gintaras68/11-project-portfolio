@@ -45,6 +45,9 @@ class Carousel {
             return false;
         }
         return true;
+
+        // alternatyvus variantas:
+        // return typeof this.selector === 'string' && this.selector !== '';
     }
 
     findElementBySelector() {
