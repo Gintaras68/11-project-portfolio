@@ -125,8 +125,8 @@ class Carousel {
                     </div>`;
 
         this.DOM.innerHTML = HTML;
-        // this.listDOM = this.DOM.querySelector('.list');
-        // this.allDotsDOM = this.DOM.querySelectorAll('.controls .dot');
+        this.listDOM = this.DOM.querySelector('.list');
+        this.allDotsDOM = this.DOM.querySelectorAll('.controls .dot');
         // this.allAnglesDOM = this.DOM.querySelectorAll('.controls > .fa');
     }
 
@@ -161,20 +161,20 @@ class Carousel {
             }
         });
 
-        // if (this.dotsEnabled) {
-        //     this.allDotsDOM.forEach((dotDOM, i) => {
-        //         dotDOM.addEventListener('click', () => {
-        //             if (!this.animationInProgress) {
-        //                 this.animationInProgress = true;
-        //                 this.visibleItemIndex = this.itemsPerView + i;
-        //                 this.slideAnimation();
-        //                 setTimeout(() => {
-        //                     this.animationInProgress = false;
-        //                 }, this.animationDuration);
-        //             }
-        //         });
-        //     });
-        // }
+        if (this.dotsEnabled) {
+            this.allDotsDOM.forEach((dotDOM, i) => {
+                dotDOM.addEventListener('click', () => {
+                    if (!this.animationInProgress) {
+                        this.animationInProgress = true;
+                        this.visibleItemIndex = this.itemsPerView + i;
+                        this.slideAnimation();
+                        setTimeout(() => {
+                            this.animationInProgress = false;
+                        }, this.animationDuration);
+                    }
+                });
+            });
+        }
 
         // PREVIOUS ITEM
         // if (this.anglesEnabled) {
