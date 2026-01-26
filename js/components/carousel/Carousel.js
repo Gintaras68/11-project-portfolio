@@ -9,7 +9,7 @@ class Carousel {
         this.allDotsDOM = null;
         this.allAnglesDOM = null;
         this.dotsEnabled = true;
-        this.anglesEnabled = true;
+        // this.anglesEnabled = true;
         // this.animationInProgress = false;
         // this.animationDuration = 1000;
         this.itemsPerView = 1;
